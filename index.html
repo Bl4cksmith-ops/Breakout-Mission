@@ -1,144 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Breakout: Mission Alpha</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phase Two Access</title>
   <style>
     body {
-      background-color: black;
-      color: lime;
+      background-color: #000;
+      color: #0f0;
       font-family: monospace;
-      text-align: center;
-      padding: 5em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       overflow: hidden;
-    }
+    }#phaseTitle {
+  font-size: 2rem;
+  opacity: 0;
+  transition: opacity 1s, text-shadow 0.5s;
+  margin-bottom: 20px;
+}
 
-    h1, p, #intel, #randomMsg {
-      animation: flicker 2s infinite;
-    }
+#inputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    h1 {
-      font-size: 2rem;
-    }
+input[type="text"] {
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  background: #111;
+  color: #0f0;
+  border-bottom: 2px solid #0f0;
+  margin-bottom: 10px;
+}
 
-    #intel {
-      margin-top: 2em;
-      font-style: italic;
-      color: #0f0;
-    }
+button {
+  background: #0f0;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    #passwordBox {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+#downloadLink {
+  margin-top: 20px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
 
-    input[type="password"] {
-      background-color: black;
-      border: 1px solid lime;
-      color: lime;
-      padding: 5px;
-      font-family: monospace;
-    }
+.solid {
+  opacity: 1 !important;
+  text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+}
 
-    #edgeCode {
-      position: fixed;
-      font-family: monospace;
-      font-size: 1.4rem;
-      color: #0f0;
-      opacity: 0.25;
-      transform: rotate(90deg);
-      pointer-events: none;
-      transition: all 3s ease-in-out;
-    }
+.wrong {
+  animation: glitch 0.3s linear;
+}
 
-    .fake-pass {
-      position: fixed;
-      font-size: 1.2rem;
-      color: #0f0;
-      opacity: 0.3;
-      animation: fakeFlash 2s ease-in-out forwards;
-      pointer-events: none;
-    }
+@keyframes glitch {
+  0% { transform: translate(0, 0); }
+  25% {
 
-    @keyframes fakeFlash {
-      0% { opacity: 0; }
-      40% { opacity: 0.3; }
-      100% { opacity: 0; }
-    }
-
-    @keyframes flicker {
-      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-        opacity: 1;
-      }
-      20%, 22%, 24%, 55% {
-        opacity: 0.4;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div id="edgeCode">PHASE TWO</div>
-
-  <h1>Breakout: Mission Alpha</h1>
-  <p>System Live. Monitoring All Frequencies.</p>
-  <p id="intel">Status: ✅ ONLINE</p>
-  <p id="randomMsg"></p>
-
-  <div id="passwordBox">
-    <input type="password" id="accessKey" placeholder="Enter Access Code">
-  </div>
-
-  <script>
-    const messages = [
-      "🛰️ Satellite Link Secured.",
-      "🔐 Encrypting Local Frequencies.",
-      "📡 Listening for Hostile Traffic...",
-      "🕶️ Operator Status: Shadow Active.",
-      "🚫 Perimeter Breach: Negative.",
-      "📦 Package Location: Classified.",
-      "🎯 Coordinates Locked.",
-      "📘 Running Protocol: Eclipse Watch.",
-      "⚠️ Noise Spike in Zone Delta.",
-      "💾 Upload to Safe Node Complete.",
-      "🗝️ Decryption Attempt Blocked."
-    ];
-
-    const fakePasswords = [
-      "XRAY-DELTA", "ZETA443", "TRINITY-09", "NOVA-CODE", "OMEGA8",
-      "ECLIPSE-22", "DAWNKEY", "VAULT-X", "THETA93", "LOCKJAW",
-      "DOOMPROXY", "VELOCITY", "FALCON-X", "RAVEN-5"
-    ];
-
-    const edgeCode = document.getElementById('edgeCode');
-
-    function updateMessage() {
-      const rand = Math.floor(Math.random() * messages.length);
-      document.getElementById("randomMsg").textContent = messages[rand];
-    }
-
-    function moveEdgeCode() {
-      edgeCode.style.top = Math.floor(Math.random() * 80 + 5) + "%";
-      edgeCode.style.left = Math.floor(Math.random() * 80 + 5) + "%";
-    }
-
-    function spawnFakePassword() {
-      const div = document.createElement("div");
-      div.className = "fake-pass";
-      div.textContent = fakePasswords[Math.floor(Math.random() * fakePasswords.length)];
-      div.style.top = Math.random() * 90 + "%";
-      div.style.left = Math.random() * 90 + "%";
-      document.body.appendChild(div);
-      setTimeout(() => div.remove(), 2000);
-    }
-
-    // Init + timers
-    updateMessage();
-    moveEdgeCode();
-    setInterval(updateMessage, 660000);     // Every 11 minutes
-    setInterval(spawnFakePassword, 1500);   // Every 1.5 seconds
-    setInterval(moveEdgeCode, 7000);        // Move "PHASE TWO" every 7 seconds
-  </script>
-</body>
-</html>
