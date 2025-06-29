@@ -45,9 +45,9 @@
     #edgeCode {
       position: fixed;
       font-family: monospace;
-      font-size: 14px;
+      font-size: 1.4rem;
       color: #0f0;
-      opacity: 0.15;
+      opacity: 0.25;
       transform: rotate(90deg);
       pointer-events: none;
       transition: all 3s ease-in-out;
@@ -55,24 +55,16 @@
 
     .fake-pass {
       position: fixed;
-      font-size: 0.85rem;
+      font-size: 1.2rem;
       color: #0f0;
-      opacity: 0.25;
+      opacity: 0.3;
       animation: fakeFlash 2s ease-in-out forwards;
       pointer-events: none;
     }
 
-    @keyframes fadeMove {
-      0% { opacity: 0; }
-      30% { opacity: 0.15; }
-      60% { opacity: 0.3; }
-      90% { opacity: 0.15; }
-      100% { opacity: 0; }
-    }
-
     @keyframes fakeFlash {
       0% { opacity: 0; }
-      50% { opacity: 0.25; }
+      40% { opacity: 0.3; }
       100% { opacity: 0; }
     }
 
@@ -87,7 +79,7 @@
   </style>
 </head>
 <body>
-  <div id="edgeCode">ACCESS PHASETWO</div>
+  <div id="edgeCode">PHASE TWO</div>
 
   <h1>Breakout: Mission Alpha</h1>
   <p>System Live. Monitoring All Frequencies.</p>
@@ -115,7 +107,8 @@
 
     const fakePasswords = [
       "XRAY-DELTA", "ZETA443", "TRINITY-09", "NOVA-CODE", "OMEGA8",
-      "ECLIPSE-22", "DAWNKEY", "VAULT-X", "THETA93", "LOCKJAW"
+      "ECLIPSE-22", "DAWNKEY", "VAULT-X", "THETA93", "LOCKJAW",
+      "DOOMPROXY", "VELOCITY", "FALCON-X", "RAVEN-5"
     ];
 
     const edgeCode = document.getElementById('edgeCode');
@@ -140,16 +133,12 @@
       setTimeout(() => div.remove(), 2000);
     }
 
-    // Cycle edgeCode ghost float
-    setInterval(moveEdgeCode, 7000);
-    moveEdgeCode();
-
-    // Cycle fake passwords
-    setInterval(spawnFakePassword, 3000);
-
-    // Change message every 11 minutes
+    // Init + timers
     updateMessage();
-    setInterval(updateMessage, 660000);
+    moveEdgeCode();
+    setInterval(updateMessage, 660000);     // Every 11 minutes
+    setInterval(spawnFakePassword, 1500);   // Every 1.5 seconds
+    setInterval(moveEdgeCode, 7000);        // Move "PHASE TWO" every 7 seconds
   </script>
 </body>
 </html>
