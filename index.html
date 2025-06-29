@@ -12,6 +12,10 @@
       padding: 5em;
     }
 
+    h1, p, #intel, #randomMsg {
+      animation: flicker 2s infinite;
+    }
+
     h1 {
       font-size: 2rem;
     }
@@ -33,7 +37,16 @@
       opacity: 0.3;
       pointer-events: none;
       overflow: hidden;
-      height: 0.6em; /* Only shows top half */
+      height: 0.6em;
+    }
+
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+      }
+      20%, 22%, 24%, 55% {
+        opacity: 0.4;
+      }
     }
   </style>
 </head>
@@ -43,5 +56,32 @@
   <h1>Breakout: Mission Alpha</h1>
   <p>System Live. Monitoring All Frequencies.</p>
   <p id="intel">Status: ✅ ONLINE</p>
+  <p id="randomMsg"></p>
+
+  <script>
+    const messages = [
+      "🛰️ Satellite Link Secured.",
+      "🔐 Encrypting Local Frequencies.",
+      "📡 Listening for Hostile Traffic...",
+      "🕶️ Operator Status: Shadow Active.",
+      "🚫 Perimeter Breach: Negative.",
+      "📦 Package Location: Classified.",
+      "🎯 Coordinates Locked.",
+      "📘 Running Protocol: Eclipse Watch.",
+      "⚠️ Warning: Noise Spike in Zone Delta.",
+      "🎤 Comms Channel 3 Open.",
+      "💾 Upload to Safe Node Complete.",
+      "🗝️ Decryption Attempt Blocked.",
+      "☁️ Cloud Proxy Phase Engaged."
+    ];
+
+    function updateMessage() {
+      const randomIndex = Math.floor(Math.random() * messages.length);
+      document.getElementById("randomMsg").textContent = messages[randomIndex];
+    }
+
+    updateMessage(); // initial run
+    setInterval(updateMessage, 660000); // every 11 minutes
+  </script>
 </body>
 </html>
