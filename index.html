@@ -1,26 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Breakout: Mission Alpha</title>
   <style>
-    <div id="edgeCode">ACCESS PHASETWO</div>
-
-<style>
-  #edgeCode {
-    position: fixed;
-    right: -40px;
-    top: 40%;
-    transform: rotate(90deg);
-    font-family: monospace;
-    font-size: 14px;
-    color: #0f0;
-    opacity: 0.3;
-    pointer-events: none;
-    overflow: hidden;
-    height: 0.6em; /* Only shows top half */
-  }
-</style>
     body {
       background-color: black;
       color: lime;
@@ -28,44 +11,37 @@
       text-align: center;
       padding: 5em;
     }
+
     h1 {
       font-size: 2rem;
     }
+
     #intel {
       margin-top: 2em;
       font-style: italic;
       color: #0f0;
     }
+
+    #edgeCode {
+      position: fixed;
+      right: -40px;
+      top: 40%;
+      transform: rotate(90deg);
+      font-family: monospace;
+      font-size: 14px;
+      color: #0f0;
+      opacity: 0.3;
+      pointer-events: none;
+      overflow: hidden;
+      height: 0.6em; /* Only shows top half */
+    }
   </style>
 </head>
 <body>
+  <div id="edgeCode">ACCESS PHASETWO</div>
+
   <h1>Breakout: Mission Alpha</h1>
   <p>System Live. Monitoring All Frequencies.</p>
-  <p>Status: ✅ ONLINE</p>
-
-  <div id="intel">Initializing intel drop...</div>
-
-  <script>
-    const messages = [
-      "⚠️ Day 17: Signals detected near Phase Line Echo.",
-      "📖 Isaiah 6:8 — 'Here am I. Send me.'",
-      "💻 OpSec Protocol: Trust what’s unseen, not just what’s said.",
-      "🛰️ Debrief uplink scheduled. Hold position.",
-      "🎯 Target lock: Destiny through discipline.",
-      "🕶️ You are the variable they didn’t prepare for.",
-      "📦 Drop scheduled: 00:00 Zulu. Eyes on horizon.",
-      "🔥 Reminder: Fire refines. Pressure defines.",
-      "💡 Daily Code: MOVE IN SILENCE. STRIKE WITH PURPOSE.",
-      "🔑 Access granted. You are not alone."
-    ];
-
-    function updateIntel() {
-      const intel = messages[Math.floor(Math.random() * messages.length)];
-      document.getElementById("intel").innerText = intel;
-    }
-
-    updateIntel(); // Initial load
-    setInterval(updateIntel, 7 * 60 * 1000); // Every 7 minutes
-  </script>
+  <p id="intel">Status: ✅ ONLINE</p>
 </body>
 </html>
