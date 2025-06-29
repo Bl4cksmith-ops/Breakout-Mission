@@ -10,6 +10,7 @@
       font-family: monospace;
       text-align: center;
       padding: 5em;
+      overflow: hidden;
     }
 
     h1, p, #intel, #randomMsg {
@@ -26,18 +27,53 @@
       color: #0f0;
     }
 
+    #passwordBox {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    input[type="password"] {
+      background-color: black;
+      border: 1px solid lime;
+      color: lime;
+      padding: 5px;
+      font-family: monospace;
+    }
+
     #edgeCode {
       position: fixed;
-      right: -40px;
-      top: 40%;
-      transform: rotate(90deg);
       font-family: monospace;
       font-size: 14px;
       color: #0f0;
-      opacity: 0.3;
+      opacity: 0.15;
+      transform: rotate(90deg);
       pointer-events: none;
-      overflow: hidden;
-      height: 0.6em;
+      transition: all 3s ease-in-out;
+    }
+
+    .fake-pass {
+      position: fixed;
+      font-size: 0.85rem;
+      color: #0f0;
+      opacity: 0.25;
+      animation: fakeFlash 2s ease-in-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes fadeMove {
+      0% { opacity: 0; }
+      30% { opacity: 0.15; }
+      60% { opacity: 0.3; }
+      90% { opacity: 0.15; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes fakeFlash {
+      0% { opacity: 0; }
+      50% { opacity: 0.25; }
+      100% { opacity: 0; }
     }
 
     @keyframes flicker {
@@ -58,6 +94,10 @@
   <p id="intel">Status: ✅ ONLINE</p>
   <p id="randomMsg"></p>
 
+  <div id="passwordBox">
+    <input type="password" id="accessKey" placeholder="Enter Access Code">
+  </div>
+
   <script>
     const messages = [
       "🛰️ Satellite Link Secured.",
@@ -68,20 +108,48 @@
       "📦 Package Location: Classified.",
       "🎯 Coordinates Locked.",
       "📘 Running Protocol: Eclipse Watch.",
-      "⚠️ Warning: Noise Spike in Zone Delta.",
-      "🎤 Comms Channel 3 Open.",
+      "⚠️ Noise Spike in Zone Delta.",
       "💾 Upload to Safe Node Complete.",
-      "🗝️ Decryption Attempt Blocked.",
-      "☁️ Cloud Proxy Phase Engaged."
+      "🗝️ Decryption Attempt Blocked."
     ];
 
+    const fakePasswords = [
+      "XRAY-DELTA", "ZETA443", "TRINITY-09", "NOVA-CODE", "OMEGA8",
+      "ECLIPSE-22", "DAWNKEY", "VAULT-X", "THETA93", "LOCKJAW"
+    ];
+
+    const edgeCode = document.getElementById('edgeCode');
+
     function updateMessage() {
-      const randomIndex = Math.floor(Math.random() * messages.length);
-      document.getElementById("randomMsg").textContent = messages[randomIndex];
+      const rand = Math.floor(Math.random() * messages.length);
+      document.getElementById("randomMsg").textContent = messages[rand];
     }
 
-    updateMessage(); // initial run
-    setInterval(updateMessage, 660000); // every 11 minutes
+    function moveEdgeCode() {
+      edgeCode.style.top = Math.floor(Math.random() * 80 + 5) + "%";
+      edgeCode.style.left = Math.floor(Math.random() * 80 + 5) + "%";
+    }
+
+    function spawnFakePassword() {
+      const div = document.createElement("div");
+      div.className = "fake-pass";
+      div.textContent = fakePasswords[Math.floor(Math.random() * fakePasswords.length)];
+      div.style.top = Math.random() * 90 + "%";
+      div.style.left = Math.random() * 90 + "%";
+      document.body.appendChild(div);
+      setTimeout(() => div.remove(), 2000);
+    }
+
+    // Cycle edgeCode ghost float
+    setInterval(moveEdgeCode, 7000);
+    moveEdgeCode();
+
+    // Cycle fake passwords
+    setInterval(spawnFakePassword, 3000);
+
+    // Change message every 11 minutes
+    updateMessage();
+    setInterval(updateMessage, 660000);
   </script>
 </body>
 </html>
